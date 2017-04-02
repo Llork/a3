@@ -10,10 +10,10 @@
 
     /**
     * GET
-    * /anything...
+    * /anything else...
     */
     Route::get('/{urlFolder?}', function($urlFolder = '') {
-      return ('You typed ' . $urlFolder . ' after the domain name. Please remove this and use just the doman name to access Assignment 3. Thank you.');
+      return ('You typed "' . $urlFolder . '" after the domain name. Please remove this and use just the doman name to access Assignment 3. Thank you.');
     });
 
 /*

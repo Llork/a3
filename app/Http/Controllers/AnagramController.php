@@ -12,8 +12,8 @@ class AnagramController extends Controller
     * /
     */
     public function index() {
-        return 'You are now in AnagramController.php';
-    }   
+        return view('anagrams.home');
+    }    
 
 
 
