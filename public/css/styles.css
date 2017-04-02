@@ -1,0 +1,54 @@
+
+body {
+    background-color:#ccc;
+    font-style:normal;
+    font-family:Tahoma, Geneva, sans-serif;
+    font-size:16px;
+    line-height:140%;
+    margin:0;
+    padding:0;
+}
+
+.container {
+    background-color:#fff;
+    margin:0 auto;
+    padding:20px 50px 50px 50px;
+    width:70%;
+}
+
+li {
+    padding:10px;
+}
+
+.output_area {
+    font-size:20px;
+}
+
+@media screen and (min-width:903px) {
+
+.container {
+     margin:0 auto !important;
+     width:70% !important;
+}
+
+} /* end of media query */
+
+@media screen and (min-width:601px) and (max-width:920px) {
+
+.container {
+     margin:0 auto !important;
+     width:80% !important;
+}
+
+} /* end of media query */
+
+@media screen and (max-width:600px) {
+
+.container {
+     margin:0 !important;
+    min-width:300px !important;
+    padding:10px !important;
+     width:100% !important;
+}
+
+} /* end of media query */
