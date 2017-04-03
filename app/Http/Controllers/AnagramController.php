@@ -11,7 +11,7 @@ class AnagramController extends Controller
     * GET
     * /
     */
-    public function index(Request $request) {        
+    public function rearrange(Request $request) {
 
         $phraseToAnagram = $request->input('phraseToAnagram', null);
 
@@ -56,7 +56,7 @@ class AnagramController extends Controller
             $removeBlanks=null;
         }
 
-        return view('anagrams.home')->with([
+        return view('anagrams.rearrange')->with([
             'phraseToAnagram' => $phraseToAnagram,
             'toLowerCase' => $toLowerCase,
             'toUpperCase' => $toUpperCase,

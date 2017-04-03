@@ -3,9 +3,9 @@
     /**
     * GET
     * /
-    * use the index method of AnagramController:
+    * use the rearrange method of AnagramController:
     */
-    Route::get('/', 'AnagramController@index');
+    Route::get('/', 'AnagramController@rearrange');
 
 
     /**
@@ -24,7 +24,7 @@
     Route::get('/{urlFolder?}', function($urlFolder = '') {
       return ('You typed "' . $urlFolder . '" after the domain name. Please remove this and use just the domain name to access Assignment 3. Thank you.');
     });
-        
+
 
 /*
 Route::get('/', function () {
