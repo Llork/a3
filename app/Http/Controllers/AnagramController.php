@@ -13,48 +13,72 @@ class AnagramController extends Controller
     */
     public function rearrange(Request $request) {
 
+        /* Get phrase to anagram from user input. */
         $phraseToAnagram = $request->input('phraseToAnagram', null);
 
+        /* If the user entered a phrase to be anagrammed, generated output where
+           the letters have been shuffled.  If the user did not enter a phrase to be
+           anagrammed, set the output to null.
+        */
         if ($phraseToAnagram) {
             $arrayOfInputString = str_split($phraseToAnagram); // convert input to an array
             shuffle($arrayOfInputString); // shuffle the array, thus creating an anagram
-            $outputString = 'Anagram: ' . implode($arrayOfInputString); // convert array back to a string
+            $outputString = implode($arrayOfInputString); // convert array back to a string
         }
         else {
-            $outputString = '(no output)';
+            $outputString = null;
         }
 
-        // Convert case or leave case as is, depending on what user chose:
-        if($request->input('case')=='lower') {
-            //$outputString = strtolower($outputString);
-            $toLowerCase='checked';
-            $toUpperCase=null;
-            $keepCase=null;
+        /* If the output string has content, modify to upper or lower case if this
+           was requested by the user.
+        */
+        if ($outputString != null) {
+            // Convert case or leave case as is, depending on what user chose:
+            if($request->input('case')=='lower') {
+                $outputString = strtolower($outputString);
+                $toLowerCase='checked';
+                $toUpperCase=null;
+                $keepCase=null;
+            }
+            else if($request->input('case')=='upper') {
+                $outputString = strtoupper($outputString);
+                $toLowerCase=null;
+                $toUpperCase='checked';
+                $keepCase=null;
+            }
+            else if($request->input('case')=='keep') { // keep case as is
+                $toLowerCase=null;
+                $toUpperCase=null;
+                $keepCase='checked';
+            }
         }
-        else if($request->input('case')=='upper') {
-            //$outputString = strtoupper($outputString);
-            $toLowerCase=null;
-            $toUpperCase='checked';
-            $keepCase=null;
-        }
-        else if($request->input('case')=='keep') { // keep case as is
+        else { // this will execute if there's nothing to anagram
             $toLowerCase=null;
             $toUpperCase=null;
             $keepCase='checked';
         }
-        else { // this part of else will execute the first time code is run
-            $toLowerCase=null;
-            $toUpperCase=null;
-            $keepCase='checked';
-        }
 
-        if ($request->input('removeBlanks')=='yes') {
-            $removeBlanks='checked';
+        /* If the output string has content, remove blanks if this was
+           requested by the user.
+        */
+        if ($outputString != null) {
+            if ($request->input('removeBlanks')=='yes') {
+                $removeBlanks='checked';
+            }
+            else {
+                $removeBlanks=null;
+            }
         }
         else {
             $removeBlanks=null;
         }
 
+        /* If the output string has content, append 'Anagram: ' to the front. */
+        if ($outputString != null) {
+            $outputString = 'Anagram: ' . $outputString;
+        }
+
+        /* Pass appropriate data to the view. */
         return view('anagrams.rearrange')->with([
             'phraseToAnagram' => $phraseToAnagram,
             'toLowerCase' => $toLowerCase,

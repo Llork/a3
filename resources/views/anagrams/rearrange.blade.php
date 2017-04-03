@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-	Cool Anagram Generator
+	Anagram Generator
 @endsection
 
 @section('content')
