@@ -34,19 +34,24 @@ class AnagramController extends Controller
         */
         if ($outputString != null) {
             // Convert case or leave case as is, depending on what user chose:
-            if($request->input('case')=='lower') {
+            if($request->input('case')=='lower') { // change to lower case
                 $outputString = strtolower($outputString);
                 $toLowerCase='checked';
                 $toUpperCase=null;
                 $keepCase=null;
             }
-            else if($request->input('case')=='upper') {
+            else if($request->input('case')=='upper') { // change to upper case
                 $outputString = strtoupper($outputString);
                 $toLowerCase=null;
                 $toUpperCase='checked';
                 $keepCase=null;
             }
             else if($request->input('case')=='keep') { // keep case as is
+                $toLowerCase=null;
+                $toUpperCase=null;
+                $keepCase='checked';
+            }
+            else { // this else should never run, but is here 'just in case'
                 $toLowerCase=null;
                 $toUpperCase=null;
                 $keepCase='checked';
@@ -63,6 +68,7 @@ class AnagramController extends Controller
         */
         if ($outputString != null) {
             if ($request->input('removeBlanks')=='yes') {
+                $outputString = str_replace(' ', '', $outputString);
                 $removeBlanks='checked';
             }
             else {
@@ -88,8 +94,7 @@ class AnagramController extends Controller
             'outputString' => $outputString
         ]);
 
-
-    }
+    } // end of rearrange function
 
 
 
