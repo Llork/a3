@@ -25,11 +25,4 @@
       return ('You typed "' . $urlFolder . '" after the domain name. Please remove this and use just the domain name to access Assignment 3. Thank you.');
     });
 
-
-/*
-Route::get('/', function () {
-    return view('welcome');
-});
-*/
-
 // closing php tag intentionally omitted

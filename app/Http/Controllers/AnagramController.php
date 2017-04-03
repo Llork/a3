@@ -16,8 +16,7 @@ class AnagramController extends Controller
         $phraseToAnagram = $request->input('phraseToAnagram', null);
 
         if ($phraseToAnagram) {
-            $arrayOfInputString = str_split($phraseToAnagram);
-            // $arrayOfInputString = str_split($sanitizedPhrase);  convert input to an array
+            $arrayOfInputString = str_split($phraseToAnagram); // convert input to an array
             shuffle($arrayOfInputString); // shuffle the array, thus creating an anagram
             $outputString = 'Anagram: ' . implode($arrayOfInputString); // convert array back to a string
         }
