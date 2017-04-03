@@ -9,9 +9,15 @@
     </head>
     <body>
         <div class="container">
+
             <section>
                 @yield('content')
 	        </section>
+
+            <section>
+                @yield('content2')
+	        </section>
+
         </div>
     </body>
 </html>

@@ -21,3 +21,7 @@
         <input type="submit"><br><br>
     </form>
 @endsection
+
+@section('content2')
+    {{ $outputString }}
+@endsection
