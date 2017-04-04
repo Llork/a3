@@ -33,10 +33,10 @@ class AnagramController extends Controller
         /* Validate the input.  Word or phrase to anagram is a required field, and must
            contain only letters and spaces.  Due to the nature of the anagram interface,
            I intentionally persist display of the user-entered word or phrase to anagram
-           in all cases: both when validation succeeds and when it fails.    
+           in all cases: both when validation succeeds and when it fails.
         */
         $validator = Validator::make($request->all(), [
-            'phraseToAnagram' => 'required|alpha_space',
+            'wordOrPhraseToAnagram' => 'required|alpha_space',
         ]);
 
         if (null !== ($request->input('submit'))) {
@@ -44,7 +44,7 @@ class AnagramController extends Controller
                 return view('anagrams.rearrange')
                     ->withErrors($validator)
                     ->with([
-                        'phraseToAnagram' => $request->input('phraseToAnagram', null),
+                        'wordOrPhraseToAnagram' => $request->input('wordOrPhraseToAnagram', null),
                         'toLowerCase' => null,
                         'toUpperCase' => null,
                         'keepCase' => 'checked',
@@ -55,14 +55,14 @@ class AnagramController extends Controller
         }
 
         /* Get phrase to anagram from user input. */
-        $phraseToAnagram = $request->input('phraseToAnagram', null);
+        $wordOrPhraseToAnagram = $request->input('wordOrPhraseToAnagram', null);
 
         /* If the user entered a phrase to be anagrammed, generated output where
            the letters have been shuffled.  If the user did not enter a phrase to be
            anagrammed, set the output to null.
         */
-        if ($phraseToAnagram) {
-            $arrayOfInputString = str_split($phraseToAnagram); // convert input to an array
+        if ($wordOrPhraseToAnagram) {
+            $arrayOfInputString = str_split($wordOrPhraseToAnagram); // convert input to an array
             shuffle($arrayOfInputString); // shuffle the array, thus creating an anagram
             $outputString = implode($arrayOfInputString); // convert array back to a string
         }
@@ -127,7 +127,7 @@ class AnagramController extends Controller
 
         /* Pass appropriate data to the view. */
         return view('anagrams.rearrange')->with([
-            'phraseToAnagram' => $phraseToAnagram,
+            'wordOrPhraseToAnagram' => $wordOrPhraseToAnagram,
             'toLowerCase' => $toLowerCase,
             'toUpperCase' => $toUpperCase,
             'keepCase' => $keepCase,

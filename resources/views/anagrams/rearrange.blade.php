@@ -9,8 +9,8 @@
     <p>Click the submit button as often as you'd like, to see different ways to rearrange the letters.</p>
 
     <form method="GET" action="index.php">
-        <label for='phraseToAnagram'>Word or phrase to anagram (required):</label>
-        <input type='text' size="50" name='phraseToAnagram' id='phraseToAnagram' value='{{ $phraseToAnagram or old('phraseToAnagram') }}'><br><br>
+        <label for='wordOrPhraseToAnagram'>Word or phrase to anagram (required):</label>
+        <input type='text' size="50" name='wordOrPhraseToAnagram' id='wordOrPhraseToAnagram' value='{{ $wordOrPhraseToAnagram or old('wordOrPhraseToAnagram') }}'><br><br>
         <fieldset class='radios'>
             <legend>Case</legend>
             <label><input type='radio' name='case' value='lower' {{ $toLowerCase }} > Convert to lower case &#160;&#160;</label>
