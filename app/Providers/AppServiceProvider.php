@@ -14,7 +14,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Custom validation rule to accept only alpha and space:
+        // Custom validation rule to accept only alpha and space. Credit to
+        // Chris Landeza at http://stackoverflow.com/questions/34099777/laravel-5-1-validation-rule-alpha-cannot-take-whitespace
     	Validator::extend('alpha_space', function ($attribute, $value) {
         	return preg_match('/^[\pL\s]+$/u', $value);
     	});

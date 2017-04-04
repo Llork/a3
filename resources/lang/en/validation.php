@@ -11,6 +11,7 @@ return [
     | the validator class. Some of these rules have multiple versions such
     | as the size rules. Feel free to tweak each of these messages here.
     |
+    | 4/3/2017: added error message text for custom alpha_space validation rule.
     */
 
     'accepted'             => 'The :attribute must be accepted.',

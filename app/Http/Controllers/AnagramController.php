@@ -13,8 +13,28 @@ class AnagramController extends Controller
     * GET
     * /
     */
+
+    /*  I ran into these issues regarding validation:
+        - Needed validation rule of "input must be alpha or spaces".  Laravel's alpha rule doesn't allow spaces, so I couldn't use that.
+        - Needed better control over what form fields persist after validation success or failure.
+        - Found that main processing was executing even when validation flagged an error.
+        To address these issues I created a custom validation rule (https://laravel.com/docs/5.4/validation#custom-validation-rules) *and also* a manually created validator (https://laravel.com/docs/5.4/validation#manually-creating-validators).
+        In addition to the DWA-15 course materials, Piazza discussions and the Laravel doc, credit to the following:
+        http://stackoverflow.com/questions/34099777/laravel-5-1-validation-rule-alpha-cannot-take-whitespace (credit to Chris Landeza)
+        https://www.webniraj.com/2016/02/19/laravel-5-x-custom-validation-rules/
+        http://blog.elenakolevska.com/laravel-alpha-validator-that-allows-spaces/
+
+        In addition to this controller file and the view/template files, I modified these files in order to implement the custom validation:
+        app/Providers/AppServiceProvider.php
+        resources/lang/en/validation.php
+    */
     public function rearrange(Request $request) {
 
+        /* Validate the input.  Word or phrase to anagram is a required field, and must
+           contain only letters and spaces.  Due to the nature of the anagram interface,
+           I intentionally persist display of the user-entered word or phrase to anagram
+           in all cases: both when validation succeeds and when it fails.    
+        */
         $validator = Validator::make($request->all(), [
             'phraseToAnagram' => 'required|alpha_space',
         ]);
