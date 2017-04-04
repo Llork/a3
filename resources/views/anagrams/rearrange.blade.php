@@ -5,7 +5,8 @@
 @endsection
 
 @section('content')
-    <h2>Anagram Generator</h2>
+    <h1>Anagram Generator</h1>
+
     <p>Click the submit button as often as you'd like, to see different ways to rearrange the letters.</p>
 
     <form method="GET" action="index.php">
@@ -23,6 +24,8 @@
 @endsection
 
 @section('content2')
+    <h2 class="anagram-output">Output Area</h2>
+
     {{ $outputString }}
 
     @if(count($errors) > 0)

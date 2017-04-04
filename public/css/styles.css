@@ -16,14 +16,18 @@ body {
     width:70%;
 }
 
+h2.anagram-output {
+    color:#666;
+    font-size:16px;
+}
 
 li {
     padding:10px;
 }
 
 li.error-message {
-    color:#ff0000 !important;
-    font-weight:bold !important;
+    color:#ff0000;
+    font-weight:bold;
 }
 
 .output_area {
