@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Validator; // added this
+
 class AnagramController extends Controller
 {
 
@@ -12,6 +14,25 @@ class AnagramController extends Controller
     * /
     */
     public function rearrange(Request $request) {
+
+        $validator = Validator::make($request->all(), [
+            'phraseToAnagram' => 'required|alpha_space',
+        ]);
+
+        if (null !== ($request->input('submit'))) {
+            if ($validator->fails()) {
+                return view('anagrams.rearrange')
+                    ->withErrors($validator)
+                    ->with([
+                        'phraseToAnagram' => $request->input('phraseToAnagram', null),
+                        'toLowerCase' => null,
+                        'toUpperCase' => null,
+                        'keepCase' => 'checked',
+                        'removeBlanks' => null,
+                        'outputString' => null
+                        ]);
+            }
+        }
 
         /* Get phrase to anagram from user input. */
         $phraseToAnagram = $request->input('phraseToAnagram', null);

@@ -16,8 +16,14 @@ body {
     width:70%;
 }
 
+
 li {
     padding:10px;
+}
+
+li.error-message {
+    color:#ff0000 !important;
+    font-weight:bold !important;
 }
 
 .output_area {
