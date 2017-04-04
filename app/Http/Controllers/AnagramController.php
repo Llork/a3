@@ -36,20 +36,36 @@ class AnagramController extends Controller
            in all cases: both when validation succeeds and when it fails.
         */
         $validator = Validator::make($request->all(), [
-            'wordOrPhraseToAnagram' => 'required|alpha_space',
+            'wordOrPhraseToAnagram' => 'required|alpha_space|min:3',
         ]);
 
         if (null !== ($request->input('submit'))) {
             if ($validator->fails()) {
+
+                /* Loop through errors array here, to promote separation of concerns,
+                   keeping this logic out of the view.  Credit for learning how:
+                   http://stackoverflow.com/questions/17606366/how-to-show-validation-message-laravel-in-controller
+                   http://stackoverflow.com/questions/24264771/laravel-print-the-validation-error-message
+                */
+                $errorOutput = null;
+                $messages = $validator->messages();
+                foreach ($messages->all('<li class="error-message">:message</li>') as $message)
+                {
+                $errorOutput .= $message;
+                }
+
+                /* Pass erroneous word/phrase and the formatted error message text
+                   to the view, along with default values for the other form fields:
+                */
                 return view('anagrams.rearrange')
-                    ->withErrors($validator)
                     ->with([
                         'wordOrPhraseToAnagram' => $request->input('wordOrPhraseToAnagram', null),
                         'toLowerCase' => null,
                         'toUpperCase' => null,
                         'keepCase' => 'checked',
                         'removeBlanks' => null,
-                        'outputString' => null
+                        'outputString' => null,
+                        'errorOutput' => $errorOutput
                         ]);
             }
         }
@@ -132,7 +148,8 @@ class AnagramController extends Controller
             'toUpperCase' => $toUpperCase,
             'keepCase' => $keepCase,
             'removeBlanks' => $removeBlanks,
-            'outputString' => $outputString
+            'outputString' => $outputString,
+            'errorOutput' => null
         ]);
 
     } // end of rearrange function

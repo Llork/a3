@@ -28,12 +28,6 @@
 
     {{ $outputString }}
 
-    @if(count($errors) > 0)
-        <ul>
-            @foreach($errors->all() as $error)
-                <li class='error-message'>{{ $error }}</li>
-            @endforeach
-        </ul>
-    @endif
+    {!! $errorOutput !!}
 
 @endsection
